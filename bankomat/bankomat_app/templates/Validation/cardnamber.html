@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block meta_title %}Стартовая страница{% endblock meta_title %}
+{% block logo %}РАДЫ ПРИВЕТСВОВАТЬ ВАС В БАНКОМАТНОЙ СЕТИ{% endblock logo %}
+{% block title %}ВВЕДИТЕ НОМЕР КАРТЫ{% endblock %}
+
+
+{% block content %}
+  <form name="cardform">
+
+  	<div class="row" id="header" style="margin-bottom:30px">
+    <div class="col-xs-12">
+      <input type="text" class="form-control" id="cardnumber">
+    </div>
+    </div>
+
+  	
+    <div>
+	<table>
+		<tbody>
+			<tr>
+				<td><input class="btn btn-default; silver" type="button" value="1"></td>
+				<td><input class="btn btn-default; silver" type="button" value="2"></td>
+				<td><input class="btn btn-default; silver" type="button" value="3"></td>
+			</tr>
+			<tr>
+				<td><input class="btn btn-default; silver" type="button" value="4"></td>
+				<td><input class="btn btn-default; silver" type="button" value="5"></td>
+				<td><input class="btn btn-default; silver" type="button" value="6"></td>
+			</tr>
+			<tr>
+				<td><input class="btn btn-default; silver" type="button" value="7"></td> 
+				<td><input class="btn btn-default; silver" type="button" value="8"></td>
+				<td><input class="btn btn-default; silver" type="button" value="9"></td>
+			</tr>
+			<tr>
+				<td><input class="btn btn-default; silver" type="button" value="$"></td>
+				<td><input class="btn btn-default; silver" type="button" value="0"></td>
+				<td><input class="btn btn-default; silver" type="button" value="$"></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+	<div class="row" id="content-columns">
+	  <div class="col-xs-8" id="content-column">
+		<button type="button" class="btn btn-primary">Очистить</button>
+		</div>
+		<div class="col-xs-1" id="content-column">
+		<button class="btn btn-success" type="submit">OK</button>
+	  </div>
+	</div>
+
+  </form>
+
+{% endblock content %}
+
