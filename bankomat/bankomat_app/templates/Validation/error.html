@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block meta_title %}Ошибка{% endblock meta_title %}
+{% block logo %}БАНКОМАТНАЯ СЕТЬ{% endblock logo %}
+{% block title %}ОШИБКА{% endblock %}
+
+
+{% block content %}
+    
+	      
+    {% if messages %}
+        <p class="messages">
+        {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                {{ message }}
+            </p>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+	<div class="row" id="content-columns">
+	  <div class="col-xs-12" id="content-column">
+        <input class="btn btn-primary" onclick="window.history.back();" type="button" value="Назад"/>
+      </div>
+	</div>
+
+
+
+{% endblock content %}
+

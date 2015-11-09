@@ -6,14 +6,16 @@
 
 
 {% block content %}
-  <form name="cardform">
-
+  <form  method="post" enctype="multipart/form-data" role="form">
+  	{% csrf_token %}
   	<div class="row" id="header" style="margin-bottom:30px">
-    <div class="col-xs-12">
-      <input type="text" class="form-control" id="cardnumber">
+      <div class="col-xs-12">
+      <input type="text" class="form-control" 
+      		 id="get_cash" name="get_cash"
+      		 value="{{ request.POST.get_cash }}">
+      </div>
+      <span class="help-block">{{ errors }}</span>
     </div>
-    </div>
-
   	
     <div>
 	<table>
@@ -44,15 +46,15 @@
 
 	<div class="row" id="content-columns">
 	  <div class="col-xs-8" id="content-column">
-		<button type="button" class="btn btn-primary">Очистить</button>
+		<button type="reset" class="btn btn-primary">Очистить</button>
 	  </div>
 	  <div class="col-xs-1" id="content-column">
-		<button class="btn btn-success" type="submit">OK</button>
+		<button class="btn btn-success" name="ok" type="submit">OK</button>
 	  </div>
 	</div>
 	<div class="row" id="content-columns" style="margin-top:20px">
 	  <div class="col-xs-12" id="content-column">
-		<button type="button" class="btn btn-info">Выход</button>
+		<button type="submit" name="exit" class="btn btn-success">Выход</button>
 	  </div>
 	</div>
 
@@ -61,3 +63,6 @@
 
 {% endblock content %}
 
+{% block extra_js %}
+  <script src="{{ PORTAL_URL }}{% static 'js/key.js' %}"></script>
+{% endblock extra_js %}

@@ -7,28 +7,44 @@
 
 {% block content %}
 
-    <table class="table table-hover">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ФИО</th>
+        <th>Дата</th>
+        <th>Баланс</th>
+        <th>№ операции</th>
+        <th>Операции</th>
+      </tr>
+    </thead>
       <tbody>
-      	<tr>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      	</tr>
-      </tbody>
-	</table>
+        <tr>
+      	<td>{{ cardowner.first_name }} {{ cardowner.middle_name }} {{ cardowner.last_name }}</td>
+      	<td>{{ now_date }}</td>
+            {% if cardowner.balance == 0.0 %}
+            <td>{{ empty }}</td>
+            {% else %}
+      	<td>{{ cardowner.balance }}</td>
+            {% endif %}
+            <td>{{ oper.oper_code }}</td>
+            <td>{{ oper.description }}</td>
+      </tr>
+    </tbody>
+  </table>
     
+   <form method="post" enctype="multipart/form-data" role="form">
+      {% csrf_token %}
 
 	<div class="row" id="content-columns">
 	  <div class="col-xs-8" id="content-column">
-		<button type="button" class="btn btn-primary">Очистить</button>
-		</div>
-		<div class="col-xs-1" id="content-column">
-		<button class="btn btn-success" type="submit">OK</button>
-		<a href="{% url "pin_code" %}">picode</a>
+          <input class="btn btn-success" onclick="window.history.back();" type="button" value="Назад"/>
+	  </div>
+	  <div class="col-xs-1" id="content-column">
+          <button type="submit" name="exit" class="btn btn-success">Выход</button>
 	  </div>
 	</div>
+
+  </form>
 
 
 {% endblock content %}

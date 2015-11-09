@@ -2,32 +2,47 @@
 {% load static from staticfiles %}
 {% block meta_title %}Отчет{% endblock meta_title %}
 {% block logo %}БАНКОМАТНАЯ СЕТЬ{% endblock logo %}
-{% block title %}ОПЕРАЦИЯ ЗАВЕРШЕНА{% endblock %}
+{% block title %}ОПЕРАЦИЯ ЗАВЕРШЕНА УСПЕШНО{% endblock %}
 
 
 {% block content %}
 
     <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ФИО</th>
+        <th>Дата/Время</th>
+        <th>Снятая сумма</th>
+        <th>Баланс</th>
+      </tr>
+    </thead>
       <tbody>
-      	<tr>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      	</tr>
-      </tbody>
-	</table>
+        <tr>
+            <td>{{ cardowner.first_name }} {{ cardowner.middle_name }} {{ cardowner.last_name }}</td>
+            <td>{{ now_time }}</td>
+            {% if cardowner.balance == 0.0 %}
+            <td>{{ empty }}</td>
+            {% else %}
+            <td>{{ get_cash }}</td>
+            {% endif %}
+            <td>{{ cardowner.balance }}</td>
+      </tr>
+    </tbody>
+  </table>
     
+  <form method="post" enctype="multipart/form-data" role="form">
+      {% csrf_token %}
 
 	<div class="row" id="content-columns">
 	  <div class="col-xs-8" id="content-column">
-		<button type="button" class="btn btn-primary">Очистить</button>
-		</div>
-		<div class="col-xs-1" id="content-column">
-		<button class="btn btn-success" type="submit">OK</button>
-	  </div>
+          <button type="submit" name="back" class="btn btn-success">Назад</button>
+        </div>
+        <div class="col-xs-1" id="content-column">
+          <button type="submit" name="exit" class="btn btn-success">Выход</button>
+        </div>
 	</div>
+
+  </form>
 
 
 {% endblock content %}

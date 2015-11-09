@@ -4,22 +4,25 @@
 {% block logo %}БАНКОМАТНАЯ СЕТЬ{% endblock logo %}
 {% block title %}ВЫБЕРИТЕ ДЕЙСТВИЕ{% endblock %}
 
-
 {% block content %}
+<form method="post" enctype="multipart/form-data" role="form">
+  	{% csrf_token %}
+
 <div class="delay"></div>
   <div class="row" id="content-columns">
 	  <div class="col-xs-7" id="content-column">
-		<button href='' type="button" class="btn btn-primary">Баланс</button>
+		<button type="submit" name="balance" class="btn btn-success">Баланс</button>
 	  </div>
 	  <div class="col-xs-1" id="content-column" style="padding-left: 80px !important">
-		<button type="button" class="btn btn-success">Снять сумму</button>
+		<button type="submit" name="get_cash" class="btn btn-success">Снять сумму</button>
 	  </div>
   </div>
   <div class="row" id="content-columns" style="margin-top:40px">
 	  <div class="col-xs-12" id="content-column">
-		<button type="button" class="btn btn-info">Выход</button>
+		<button type="submit" name="exit" class="btn btn-primary">Выход</button>
 	  </div>
   </div>
+  </form>
 
 {% endblock content %}
 

@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from django.contrib import admin
 
-from .models import Cardowner
+from .models import Cardowner, Operations
 
 # class for add a parametres to register models
 class CardownerAdmin(admin.ModelAdmin): # inheritance from django.contrib.admin
@@ -14,4 +12,5 @@ class CardownerAdmin(admin.ModelAdmin): # inheritance from django.contrib.admin
 
 
 admin.site.register(Cardowner, CardownerAdmin) # add a parametres to register
+admin.site.register(Operations)
 
