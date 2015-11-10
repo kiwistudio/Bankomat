@@ -11,7 +11,7 @@
     <thead>
       <tr>
         <th>ФИО</th>
-        <th>Дата/Время</th>
+        <th>Дата</th>
         <th>Снятая сумма</th>
         <th>Баланс</th>
       </tr>
@@ -20,12 +20,13 @@
         <tr>
             <td>{{ cardowner.first_name }} {{ cardowner.middle_name }} {{ cardowner.last_name }}</td>
             <td>{{ now_time }}</td>
+            <td>{{ get_cash }}</td>
             {% if cardowner.balance == 0.0 %}
             <td>{{ empty }}</td>
             {% else %}
-            <td>{{ get_cash }}</td>
-            {% endif %}
             <td>{{ cardowner.balance }}</td>
+            {% endif %}
+            
       </tr>
     </tbody>
   </table>
@@ -35,7 +36,7 @@
 
 	<div class="row" id="content-columns">
 	  <div class="col-xs-8" id="content-column">
-          <button type="submit" name="back" class="btn btn-success">Назад</button>
+          <input class="btn btn-success" onclick="window.history.back();" type="button" value="Назад"/>
         </div>
         <div class="col-xs-1" id="content-column">
           <button type="submit" name="exit" class="btn btn-success">Выход</button>

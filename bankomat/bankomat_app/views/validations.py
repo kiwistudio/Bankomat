@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-
+from django.core.urlresolvers import reverse
 from django.contrib import messages
 
 from ..models import Cardowner
@@ -33,29 +33,37 @@ def cardnumber(request):
                 return render(request, 'Validation/error.html', {})
     return render(request, 'Validation/cardnumber.html')		
 	
-
+tries = 4
 
 def pin_code(request, pk):
+    global tries
     cardowner = Cardowner.objects.get(pk=pk)
     if request.method == "POST":
         if request.POST.get('ok') is not None:
             pin_code = request.POST.get('pin_code', '').strip()
             if pin_code != cardowner.pin_code:
-                tries = 4-1
+                tries -= 1
                 if tries == 0:
-                    cardowner.card_block == True
+                    tries = 4
+                    cardowner.card_block = True
                     cardowner.save()
                     messages.success(request, u'Карта заблокирована!')
-                    return render(request, 'Validation/error.html', {})
+                    return HttpResponseRedirect(reverse('error2'))
                 return render(request, 'Validation/pin_code.html', {'tries':tries})
             else:
                 return HttpResponseRedirect(u'operations/')
         if request.POST.get('back') is not None:
             return render(request, 'Validation/cardnumber.html', {})
 	
-    return render(request, 'Validation/pin_code.html', {'tries':4})
+    return render(request, 'Validation/pin_code.html', {'tries':tries})
 
 
 def error(request):
     
     return render(request, 'Validation/error.html', {})
+
+def error2(request):
+    if request.method == "POST":
+        if request.POST.get('exit') is not None:
+            return HttpResponseRedirect(reverse('home'))
+    return render(request, 'Validation/error2.html', {})

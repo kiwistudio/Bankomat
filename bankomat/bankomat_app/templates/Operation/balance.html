@@ -13,24 +13,40 @@
         <th>ФИО</th>
         <th>Дата</th>
         <th>Баланс</th>
-        <th>№ операции</th>
-        <th>Операции</th>
       </tr>
     </thead>
       <tbody>
         <tr>
-      	<td>{{ cardowner.first_name }} {{ cardowner.middle_name }} {{ cardowner.last_name }}</td>
-      	<td>{{ now_date }}</td>
+            <td>{{ cardowner.first_name }} {{ cardowner.middle_name }} {{ cardowner.last_name }}</td>
+            <td>{{ now_date }}</td>
             {% if cardowner.balance == 0.0 %}
             <td>{{ empty }}</td>
             {% else %}
-      	<td>{{ cardowner.balance }}</td>
+            <td>{{ cardowner.balance }}</td>
             {% endif %}
-            <td>{{ oper.oper_code }}</td>
-            <td>{{ oper.description }}</td>
       </tr>
     </tbody>
   </table>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Время операции</th>
+        <th>№ операции</th>
+        <th>Операции</th>
+      </tr>
+    </thead>
+    {% for o in oper %}
+      <tbody>
+        <tr>
+            <td>{{ o.data_time }}</td>
+            <td>{{ o.id }}</td>
+            <td><p>{{ o.description }}</p></td>
+      </tr>
+    </tbody>
+   {% endfor %} 
+  </table>
+
     
    <form method="post" enctype="multipart/form-data" role="form">
       {% csrf_token %}

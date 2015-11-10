@@ -12,7 +12,7 @@
   	<div class="row" id="header" style="margin-bottom:30px">
     <div class="col-xs-12">
       <input type="text" class="form-control" 
-      		 id="cardnumber" name="cardnumber"
+      		 id="input" name="cardnumber"
       		 value="{{ request.POST.cardnumber }}">
     </div>
     </div>
@@ -56,7 +56,6 @@
   </form>
 
 {% endblock content %}
-
 
 {% block extra_js %}
   <script src="{{ PORTAL_URL }}{% static 'js/key.js' %}"></script>

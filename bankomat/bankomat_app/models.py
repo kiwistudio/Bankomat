@@ -61,21 +61,22 @@ class Operations(models.Model):
 
 	# Добавляем метод для удобного представления в shell и Django админке
     def __unicode__(self):
-        return u"%s %s" % (self.oper_code, self.oper_table)
+        return u"%s" % u'Операции карты'
 
+    description = models.TextField(
+		blank=True,
+		verbose_name=u"Описание")
+    
     oper_code = models.IntegerField(
         blank=False,
         verbose_name=u"номер операции",
         default=0)
 
-    description = models.TextField(
-		blank=True,
-		verbose_name=u"Описание")
-
     oper_table = models.ForeignKey('Cardowner',
         verbose_name=u"Владелец карты")
 
-    data = models.CharField(
+    data_time = models.CharField(
         max_length=256,
         blank=False,
-        verbose_name=u"Дата операции")
+        null=True,
+        verbose_name=u"Дата и время операции")

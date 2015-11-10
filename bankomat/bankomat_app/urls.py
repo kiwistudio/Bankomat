@@ -6,6 +6,7 @@ urlpatterns = patterns('',
 	url(r'^$', 'bankomat_app.views.validations.cardnumber', name='home'),
 	url(r'^pin_code/(?P<pk>\d+)/$', 'bankomat_app.views.validations.pin_code', name='pin_code'),
 	url(r'^error/$', 'bankomat_app.views.validations.error', name='error'),
+	url(r'^error2/$', 'bankomat_app.views.validations.error2', name='error2'),
 
 	# Operations
 	url(r'^pin_code/(?P<pk>\d+)/operations/$', 'bankomat_app.views.operations.operations', name='operations'),
