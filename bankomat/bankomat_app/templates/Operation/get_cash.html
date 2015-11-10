@@ -8,13 +8,15 @@
 {% block content %}
   <form  method="post" enctype="multipart/form-data" role="form">
   	{% csrf_token %}
+
   	<div class="row" id="header" style="margin-bottom:30px">
       <div class="col-xs-12">
       <input type="text" class="form-control" 
       		 id="input" name="get_cash"
+      		 placeholder='сумма для снятия наличных'
       		 value="{{ request.POST.get_cash }}">
       </div>
-      <span class="help-block">{{ errors }}</span>
+      <!-- <span class="help-block">{{ errors }}</span> -->
     </div>
   	
     <div>
@@ -36,9 +38,9 @@
 				<td><input class="btn btn-default; silver" type="button" value="9"></td>
 			</tr>
 			<tr>
-				<td><input class="btn btn-default; silver" type="button" value="$"></td>
-				<td><input class="btn btn-default; silver" type="button" value="0"></td>
-				<td><input class="btn btn-default; silver" type="button" value="$"></td>
+				<td><input class="btn btn-default; silver" type="button" value="#"></td>
+				<td><input class="btn btn-default; silver" type="button" value="0" id="n0"></td>
+				<td><input class="btn btn-default; silver" type="button" value="c" id="bckspc"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -66,3 +68,11 @@
 {% block extra_js %}
   <script src="{{ PORTAL_URL }}{% static 'js/key.js' %}"></script>
 {% endblock extra_js %}
+
+{% block extra_js2 %}
+<script type="text/javascript">
+    jQuery(function(){
+      jQuery(".form-control").mask("999 999 999 999");
+  });
+</script>
+{% endblock extra_js2 %}

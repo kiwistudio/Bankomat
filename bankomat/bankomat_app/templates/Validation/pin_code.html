@@ -15,7 +15,8 @@
   	<div class="row" id="header" style="margin-bottom:30px">
     <div class="col-xs-12">
       <input type="password" class="form-control" 
-      		 id="input" name="pin_code"
+      		 id="input" name="pin_code"  maxlength="4"
+      		 placeholder='пин-код'
       		 value="{{ request.POST.pin_code }}">
     </div>
     </div>
@@ -40,9 +41,9 @@
 				<td><input class="btn btn-default; silver" type="button" value="9" id="n9"></td>
 			</tr>
 			<tr>
-				<td><input class="btn btn-default; silver" type="button" value="$"></td>
+				<td><input class="btn btn-default; silver" type="button" value="#"></td>
 				<td><input class="btn btn-default; silver" type="button" value="0" id="n0"></td>
-				<td><input class="btn btn-default; silver" type="button" value="&#8249;" id="bckspc"></td>
+				<td><input class="btn btn-default; silver" type="button" value="c" id="bckspc"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -70,3 +71,11 @@
 {% block extra_js %}
   <script src="{{ PORTAL_URL }}{% static 'js/key.js' %}"></script>
 {% endblock extra_js %}
+
+{% block extra_js2 %}
+<script type="text/javascript">
+    jQuery(function(){
+      jQuery(".form-control").mask("9999");
+  });
+</script>
+{% endblock extra_js2 %}

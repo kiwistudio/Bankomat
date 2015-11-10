@@ -20,11 +20,11 @@
         <tr>
             <td>{{ cardowner.first_name }} {{ cardowner.middle_name }} {{ cardowner.last_name }}</td>
             <td>{{ now_time }}</td>
-            <td>{{ get_cash }}</td>
+            <td>{{ get_cash }} грн</td>
             {% if cardowner.balance == 0.0 %}
             <td>{{ empty }}</td>
             {% else %}
-            <td>{{ cardowner.balance }}</td>
+            <td>{{ cardowner.balance }} грн</td>
             {% endif %}
             
       </tr>

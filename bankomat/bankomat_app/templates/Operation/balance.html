@@ -20,9 +20,9 @@
             <td>{{ cardowner.first_name }} {{ cardowner.middle_name }} {{ cardowner.last_name }}</td>
             <td>{{ now_date }}</td>
             {% if cardowner.balance == 0.0 %}
-            <td>{{ empty }}</td>
+            <td>{{ empty }} грн</td>
             {% else %}
-            <td>{{ cardowner.balance }}</td>
+            <td>{{ cardowner.balance }} грн</td>
             {% endif %}
       </tr>
     </tbody>
@@ -62,6 +62,27 @@
 
   </form>
 
+
+
+{% if oper.has_other_pages %}
+{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+<nav class='col-xs-12'>
+  <ul class="pagination">
+      <li>
+        <a href="{{ PORTAL_URL }}/pin_code/{{ cardowner.id }}/operations/balance/?page=1&amp;">&laquo;</a>
+      </li>
+      {% for p in oper.paginator.page_range %}
+      <li {% if oper.number == p %}class="active"{% endif %}>
+        <a href="{{ PORTAL_URL }}/pin_code/{{ cardowner.id }}/operations/balance/?page={{ p }}&amp;">{{ p }}</a>
+      </li>
+      {% endfor %}
+      <li>
+        <a href="{{ PORTAL_URL }}/pin_code/{{ cardowner.id }}/operations/balance/?page={{ oper.paginator.num_pages}}&amp;">&raquo;</a>
+      </li>
+  </ul>
+</nav>
+{% endwith %}
+{% endif %}
 
 {% endblock content %}
 

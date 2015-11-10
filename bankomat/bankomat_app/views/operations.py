@@ -3,6 +3,7 @@ import datetime
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 
@@ -23,10 +24,10 @@ def operations(request, pk):
     cardowner = Cardowner.objects.get(pk=pk)
     if request.method == "POST":
         if request.POST.get('balance') is not None:   
-            now_time = str(datetime.datetime.now())[:-7]
+            now_time = datetime.datetime.now() + datetime.timedelta(hours=2)
             data = {'oper_table':cardowner,
             		'description': u'Просмотр баланса',
-            		'data_time': now_time
+            		'data_time': str(now_time)[:-7]
             	}
             oper = Operations(**data)
             oper.save()	            
@@ -42,10 +43,27 @@ def balance(request, pk):
     cardowner = Cardowner.objects.get(pk=pk)
     oper = Operations.objects.filter(oper_table=pk)
     now_date = datetime.date.today()
+    
+
+    # paginate operations
+    paginator = Paginator(oper, 3)
+    page = request.GET.get('page')
+    try:
+        oper = paginator.page(page)
+        cardowner = Cardowner.objects.get(pk=pk)
+    except PageNotAnInteger:
+    # If page is not an integer, deliver first page.
+        oper = paginator.page(1)
+    except EmptyPage:
+    # last page of results.
+        cardowner = Cardowner.objects.get(pk=pk)
+        oper = paginator.page(paginator.num_pages)
+
     context = {'cardowner':cardowner,
             'empty':'0',
             'now_date':now_date,
             'oper':oper}
+
     if request.method == "POST":
         if request.POST.get('exit') is not None:
             return HttpResponseRedirect(reverse('home'))
@@ -73,10 +91,10 @@ def get_cash(request, pk):
             else:
                 cardowner.balance = balance
                 cardowner.save()
-                now_time = str(datetime.datetime.now())[:-7]
+                now_time = datetime.datetime.now() + datetime.timedelta(hours=2)
                 data = {'oper_table':cardowner,
             		    'description': u'Снятие наличных:%s' % get_cash,
-            		    'data_time': now_time
+            		    'data_time': str(now_time)[:-7]
             	    }
                 oper = Operations(**data)
                 oper.save()	
