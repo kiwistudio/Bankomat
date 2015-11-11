@@ -18,8 +18,7 @@ def ifalpha(text):
     if lit: return True
     else: return False
   
-
-# Views for Students
+# Operations page
 def operations(request, pk):
     cardowner = Cardowner.objects.get(pk=pk)
     if request.method == "POST":
@@ -38,13 +37,12 @@ def operations(request, pk):
             return HttpResponseRedirect(reverse('home'))
     return render(request, 'Operation/operations.html')
 
-
+# Balance page
 def balance(request, pk):
     cardowner = Cardowner.objects.get(pk=pk)
     oper = Operations.objects.filter(oper_table=pk)
     now_date = datetime.date.today()
     
-
     # paginate operations
     paginator = Paginator(oper, 3)
     page = request.GET.get('page')
@@ -69,7 +67,7 @@ def balance(request, pk):
             return HttpResponseRedirect(reverse('home'))
     return render(request, 'Operation/balance.html', context)
 
-
+# Get Cash page
 def get_cash(request, pk):
     cardowner = Cardowner.objects.get(pk=pk)
     if request.method == "POST":
@@ -111,10 +109,8 @@ def get_cash(request, pk):
             return render(request, 'Validation/error.html', {})
     return render(request, 'Operation/get_cash.html', {})
 
-
+# Report page
 def report(request, pk):
-    # cardowner = Cardowner.objects.get(pk=pk)
-    # oper = Operations.objects.get(oper_table=pk)
     if request.method == "POST":
         if request.POST.get('exit') is not None:
             return HttpResponseRedirect(reverse('home'))

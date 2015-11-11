@@ -7,7 +7,7 @@ from django.contrib import messages
 from ..models import Cardowner
 
 
-# Views for Students
+# Home page
 def cardnumber(request):
 
     if request.method == "POST":
@@ -32,9 +32,10 @@ def cardnumber(request):
                 messages.success(request, u'%s' % errors['cardnumber'])
                 return render(request, 'Validation/error.html', {})
     return render(request, 'Validation/cardnumber.html')		
+
 	
 tries = 4
-
+# pin validation page
 def pin_code(request, pk):
     global tries
     cardowner = Cardowner.objects.get(pk=pk)
@@ -57,11 +58,12 @@ def pin_code(request, pk):
 	
     return render(request, 'Validation/pin_code.html', {'tries':tries})
 
-
+# Error page
 def error(request):
     
     return render(request, 'Validation/error.html', {})
 
+# Error2 page
 def error2(request):
     if request.method == "POST":
         if request.POST.get('exit') is not None:

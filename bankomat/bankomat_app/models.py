@@ -2,7 +2,7 @@
 
 from django.db import models
  
-# Create your models here.
+
 class Cardowner(models.Model):
     """Cardowner"""
 
@@ -66,11 +66,6 @@ class Operations(models.Model):
     description = models.TextField(
 		blank=True,
 		verbose_name=u"Описание")
-    
-    oper_code = models.IntegerField(
-        blank=False,
-        verbose_name=u"номер операции",
-        default=0)
 
     oper_table = models.ForeignKey('Cardowner',
         verbose_name=u"Владелец карты")
